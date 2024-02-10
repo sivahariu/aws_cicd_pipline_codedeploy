@@ -18,7 +18,7 @@ phases:
       - UNIQUE_ID=$(date '+%Y%m%d%H%M%S')
       - IMAGE_TAG="$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${UNIQUE_ID}"
       - docker build -t "$IMAGE_TAG" .
-      - docker push "$DOCKER_BUILD_CMD"
+      - docker push "$IMAGE_TAG"
   post_build:
     commands:
       - echo "Build completed successfully...!"
