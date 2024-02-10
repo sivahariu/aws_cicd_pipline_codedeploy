@@ -6,20 +6,17 @@ env:
     DOCKER_REGISTRY_PASSWORD: /myapp/docker-credentials/password
     DOCKER_REGISTRY_URL: /myapp/docker-registry/url
 phases:
-  install:
-    runtime-versions:
-      python: 3.11
   pre_build:
     commands:
       - echo "Installing dependencies..."
-      - pip install -r requirements.txt
   build:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
-      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/pythonproject:latest" .
-      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/pythonproject:latest"
+      - TIMESTAMP=$(date +%s)
+      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/pythonproject:$TIMESTAMP" .
+      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/pythonproject:$TIMESTAMP"
   post_build:
     commands:
       - echo "Build completed successfully!"

@@ -1,9 +1,9 @@
-FROM httpd:latest
+# Base Image
+FROM httpd:2.4
 
 #Copy the content of the index file to the default http server index file
-
 WORKDIR /httpapp
 
-COPY index.html /usr/local/apache2/htdocs/index.html
+COPY index /usr/local/apache2/htdocs/
 
-EXPOSE 80
+EXPOSE 9090
