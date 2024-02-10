@@ -16,8 +16,8 @@ phases:
       - echo "Building Docker image..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
       - TIMESTAMP=$(date +%s)
-      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/pythonproject:$TIMESTAMP" .
-      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/pythonproject:$TIMESTAMP"
+      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:$TIMESTAMP" .
+      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:$TIMESTAMP"
   post_build:
     commands:
       - echo "Build completed successfully!"
