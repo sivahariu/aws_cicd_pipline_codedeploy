@@ -14,9 +14,10 @@ phases:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
+      - DATE=$(date +%Y%m%d%H%M%S)
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
-      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:latest" .
-      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:latest"
+      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${DATE}" .
+      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${DATE}"
   post_build:
     commands:
       - echo "Build completed successfully!"
