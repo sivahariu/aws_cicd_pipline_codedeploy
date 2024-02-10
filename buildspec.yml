@@ -15,7 +15,7 @@ phases:
       - echo "Running tests..."
       - echo "Building Docker image..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
-      - UNIQUE_ID=$(date '+%Y%m%d%H%M')
+      - UNIQUE_ID=$(TZ=Asia/Kolkata date '+%Y%m%d%H%M')
       - IMAGE_TAG="$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${UNIQUE_ID}"
       - docker build -t "$IMAGE_TAG" .
       - docker push "$IMAGE_TAG"
