@@ -1,5 +1,5 @@
 # Base Image
-FROM httpd:2.4
+FROM nginx:latest
 
 #Copy the content of the index file to the default http server index file
 WORKDIR /httpapp
