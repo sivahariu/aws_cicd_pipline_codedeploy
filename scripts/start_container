@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Start the container
-
+UNIQUE_ID=$(TZ=Asia/Kolkata date '+%Y%m%d%H')
 # Pull the Docker image from Docker Hub
-docker pull sivahariu/staticwebpage
+docker pull sivahariu/staticwebpage:$UNIQUE_ID
 
 # Run the Docker image as a container
-docker run -d -p 80:9090 sivahariu/staticwebpage
+docker run -d -p 80:9090 sivahariu/staticwebpage:$UNIQUE_ID
