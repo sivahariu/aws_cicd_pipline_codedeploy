@@ -14,11 +14,11 @@ phases:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - UNIQUE_ID=$(date '+%Y%m%d')
-      - IMAGE_TAG="$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${UNIQUE_ID}"
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
-      - docker build -t "$IMAGE_TAG" .
-      - docker push "$IMAGE_TAG"
+      - UNIQUE_ID=$(date '+%Y%m%d%H%M%S')
+      - IMAGE_TAG="$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${UNIQUE_ID}"
+      - DOCKER_BUILD_CMD="docker build -t "$IMAGE_TAG" ."
+      - docker push "$DOCKER_BUILD_CMD"
   post_build:
     commands:
       - echo "Build completed successfully...!"
