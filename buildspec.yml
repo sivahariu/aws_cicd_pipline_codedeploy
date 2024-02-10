@@ -14,12 +14,12 @@ phases:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - DATE=$(date +%Y%m%d%H%M%S)
-      - IMAGE_TAG="$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${DATE}"
+      - UNIQUE_ID=$(date '+%Y%m%d%H%M%S')-$(shuf -i 100000-999999 -n 1)
+      - IMAGE_TAG="$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/staticwebpage:${UNIQUE_ID}"
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
       - docker build -t "$IMAGE_TAG" .
-      #- docker push "$IMAGE_TAG"
-      - if [ "$(docker images -q $IMAGE_TAG 2> /dev/null)" != "" ]; then echo "Image already exists."; else docker push "$IMAGE_TAG"; fi
+      - docker push "$IMAGE_TAG"
+      #- if [ "$(docker images -q $IMAGE_TAG 2> /dev/null)" != "" ]; then echo "Image already exists."; else docker push "$IMAGE_TAG"; fi
   post_build:
     commands:
       - echo "Build completed successfully!"
