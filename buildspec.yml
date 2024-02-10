@@ -8,7 +8,8 @@ env:
 phases:
   pre_build:
     commands:
-      - echo "Installing dependencies..."
+      - sudo chmod -R +x scripts/*
+      - echo "Changing the permissions of scripts..."
   build:
     commands:
       - echo "Running tests..."
